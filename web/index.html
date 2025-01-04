@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavetronics - Your Electronic Superstore</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #1E90FF;
+            height: 150px;
+            text-align: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #1E90FF;
+            color: white;
+        }
+        .hero {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        .hero h2 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #333;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 0 20px;
+        }
+        .feature-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            text-align: center;
+        }
+        .feature-box h3 {
+            margin: 10px 0;
+            color: #1E90FF; /* Changed to darker blue */
+        }
+        .products {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .product-card h4 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-card p {
+            color: #888;
+            font-size: 14px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Kavetronics</h1>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact Us</a>
+</nav>
+
+<div class="hero">
+    <h2>Discover the Latest in Electronics</h2>
+</div>
+
+<section class="features" id="features">
+    <div class="feature-box">
+        <h3>Latest Gadgets</h3>
+        <p>Explore the newest and most innovative gadgets.</p>
+    </div>
+    <div class="feature-box">
+        <h3>Exclusive Deals</h3>
+        <p>Get the best prices with our exclusive offers.</p>
+    </div>
+    <div class="feature-box">
+        <h3>Fast Shipping</h3>
+        <p>Enjoy quick and reliable delivery to your doorstep.</p>
+    </div>
+</section>
+
+<section class="products" id="products">
+    <div class="product-card">
+        <img src="images/smartphone.jpg" alt="Smartphone"> <!-- Local product image -->
+        <h4>Smartphone</h4>
+        <p>High-performance smartphone with a stunning display.</p>
+    </div>
+    <div class="product-card">
+        <img src="images/laptop.jpg" alt="Laptop"> <!-- Local product image -->
+        <h4>Laptop</h4>
+        <p>Powerful laptop for work and play.</p>
+    </div>
+    <div class="product-card">
+        <img src="images/headphones.jpg" alt="Headphones"> <!-- Local product image -->
+        <h4>Headphones</h4>
+        <p>Noise-cancelling headphones with superior sound quality.</p>
+    </div>
+    <div class="product-card">
+        <img src="images/tablet.jpg" alt="Tablet"> <!-- Local product image -->
+        <h4>Tablet</h4>
+        <p>Versatile tablet with high-resolution display.</p>
+    </div>
+    <div class="product-card">
+        <img src="images/smartwatch.jpg" alt="Smartwatch"> <!-- Local product image -->
+        <h4>Smartwatch</h4>
+        <p>Smartwatch with fitness tracking and notifications.</p>
+    </div>
+    <div class="product-card">
+        <img src="images/camera.jpg" alt="Camera"> <!-- Local product image -->
+        <h4>Camera</h4>
+        <p>High-resolution camera for capturing every moment.</p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Kavetronics. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
