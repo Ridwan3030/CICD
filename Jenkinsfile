@@ -20,10 +20,10 @@ pipeline {
                     withSonarQubeEnv('SonarQube-Server') {              // Plugin handles authentication
                         sh """
                         sonar-scanner \
-                        -Dsonar.projectKey=Project-1 \                  // Project key from SonarQube
-                        -Dsonar.sources=api,web \                 // Source directories to analyze
-                        -Dsonar.inclusions=**/*.py,**/*.html \
-                        -Dsonar.host.url=$SONARQUBE_SERVER             // SonarQube server URL
+                          -Dsonar.projectKey=Project-1 \
+                          -Dsonar.sources=api,web \
+                          -Dsonar.inclusions=**/*.py,**/*.html \
+                          -Dsonar.host.url=$SONARQUBE_SERVER
                         """
                     }
                 }
