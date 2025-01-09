@@ -2,14 +2,31 @@ pipeline {
     agent any
 
     environment {
+        SONARQUBE_SERVER = 'SonarQube-Server'                          // Match the server name in Jenkins
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')  // Docker Hub credentials
-        GIT_CREDENTIALS = credentials('github')                      // GitHub credentials
+        GIT_CREDENTIALS = credentials('github')                       // GitHub credentials
     }
 
     stages {
         stage('Checkout Code') {
             steps {
                 git credentialsId: 'github', url: 'https://github.com/Kavetec/CICD.git', branch: 'main'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube-Server') {              // Plugin handles authentication
+                        sh """
+                        sonar-scanner \
+                        -Dsonar.projectKey=ecom-app \                  // Project key from SonarQube
+                        -Dsonar.sources=app,frontend \                 // Source directories to analyze
+                        -Dsonar.inclusions=**/*.py,**/*.html \
+                        -Dsonar.host.url=$SONARQUBE_SERVER             // SonarQube server URL
+                        """
+                    }
+                }
             }
         }
 
