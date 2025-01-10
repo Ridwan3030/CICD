@@ -17,13 +17,12 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube-Server') {              // Plugin handles authentication
+                    withSonarQubeEnv('SonarQube-Server') {
                         sh """
-                        sonar-scanner \
+                        ${scannerHome}/bin/sonar-scanner \
                           -Dsonar.projectKey=Project-1 \
                           -Dsonar.sources=api,web \
-                          -Dsonar.inclusions=**/*.py,**/*.html \
-                          -Dsonar.host.url=$SONARQUBE_SERVER
+                          -Dsonar.inclusions=**/*.py,**/*.html
                         """
                     }
                 }
