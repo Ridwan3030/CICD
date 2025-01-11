@@ -18,15 +18,17 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    sh """
-                    echo "Running SonarQube Analysis with CLI..."
-                    sonar-scanner \
-                        -Dsonar.projectKey=Project-1 \
-                        -Dsonar.sources=api,web \
-                        -Dsonar.host.url=${SONARQUBE_SERVER_URL} \
-                        -Dsonar.login=${SONARQUBE_TOKEN} \
-                        -Dsonar.inclusions=**/*.py,**/*.html
-                    """
+                    withEnv(['SONAR_LOGIN=${SONARQUBE_TOKEN}']) {
+                        sh """
+                        echo Running SonarQube Analysis with CLI...
+                        /opt/sonar-scanner/bin/sonar-scanner \
+                          -Dsonar.projectKey=Project-1 \
+                          -Dsonar.sources=api,web \
+                          -Dsonar.host.url=${SONARQUBE_SERVER_URL} \
+                          -Dsonar.login=$SONAR_LOGIN \
+                          -Dsonar.inclusions=**/*.py,**/*.html
+                        """
+                    }
                 }
             }
         }
