@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     environment {
-        SONARQUBE_SERVER = 'SonarQube-Server'                          // Match the server name in Jenkins
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')  // Docker Hub credentials
-        GIT_CREDENTIALS = credentials('github')                       // GitHub credentials
+        SONARQUBE_SERVER_URL = 'https://sonarqube.yourdomain.com'       // Replace with your SonarQube server URL
+        SONARQUBE_TOKEN = credentials('sonarqube-token')               // SonarQube authentication token from Jenkins credentials
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')   // Docker Hub credentials
+        GIT_CREDENTIALS = credentials('github')                        // GitHub credentials
     }
 
     stages {
@@ -17,14 +18,15 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube-Server') {
-                        sh """
-                        ${scannerHome}/bin/sonar-scanner \
-                          -Dsonar.projectKey=Project-1 \
-                          -Dsonar.sources=api,web \
-                          -Dsonar.inclusions=**/*.py,**/*.html
-                        """
-                    }
+                    sh """
+                    echo "Running SonarQube Analysis with CLI..."
+                    sonar-scanner \
+                        -Dsonar.projectKey=Project-1 \
+                        -Dsonar.sources=api,web \
+                        -Dsonar.host.url=${SONARQUBE_SERVER_URL} \
+                        -Dsonar.login=${SONARQUBE_TOKEN} \
+                        -Dsonar.inclusions=**/*.py,**/*.html
+                    """
                 }
             }
         }
