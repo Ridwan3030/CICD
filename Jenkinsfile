@@ -62,20 +62,27 @@ pipeline {
             steps {
                 script {
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                        // Apply the backend deployment and service
                         sh '''
-                        echo "Applying Kubernetes Deployment and Service manifests..."
-                        
-                        # Apply deployment manifest
-                        kubectl apply -f k8s/deployment.yaml
-
-                        # Apply service manifest
-                        kubectl apply -f k8s/service.yaml
-                        
-                        echo "Checking deployment rollout status..."
-                        kubectl rollout status deployment/ecom-app
-                        
-                        echo "Application deployed successfully!"
+                        echo "Applying backend deployment and service..."
+                        kubectl apply -f backend-deployment.yaml
+                        kubectl apply -f backend-service.yaml
                         '''
+
+                        // Apply the frontend deployment and service
+                        sh '''
+                        echo "Applying frontend deployment and service..."
+                        kubectl apply -f frontend-deployment.yaml
+                        kubectl apply -f frontend-service.yaml
+                        '''
+
+                        echo "Checking backend deployment rollout status..."
+                        sh 'kubectl rollout status deployment/backend'
+
+                        echo "Checking frontend deployment rollout status..."
+                        sh 'kubectl rollout status deployment/frontend'
+
+                        echo "Application deployed successfully!"
                     }
                 }
             }
