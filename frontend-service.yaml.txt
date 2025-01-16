@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecom-frontend
+spec:
+  selector:
+    app: ecom-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
