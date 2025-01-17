@@ -22,7 +22,7 @@ pipeline {
                         sh """
                         echo Running SonarQube Analysis with CLI...
                         /opt/sonar-scanner/bin/sonar-scanner \
-                          -Dsonar.projectKey=Project-1 \
+                          -Dsonar.projectKey=Project-2 \
                           -Dsonar.sources=api,web \
                           -Dsonar.host.url=${SONARQUBE_SERVER_URL} \
                           -Dsonar.login=$SONAR_LOGIN \
