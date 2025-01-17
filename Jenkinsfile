@@ -91,8 +91,10 @@ pipeline {
 
     post {
         always {
-            echo 'Pipeline completed.'
-            cleanWs() // Clean up the workspace after the pipeline runs
+            node {
+                echo 'Pipeline completed.'
+                cleanWs() // Clean up the workspace after the pipeline runs
+            }
         }
     }
 }
