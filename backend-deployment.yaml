@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ecom-backend
+  labels:
+    app: ecom-backend
 spec:
   replicas: 2
   selector:
@@ -17,6 +19,5 @@ spec:
         image: isaackavetec/api:latest
         ports:
         - containerPort: 5000
-        env:
-        - name: DATABASE_URL
-          value: "your-database-url"
+        command: ["python"]
+        args: ["app.py"]
