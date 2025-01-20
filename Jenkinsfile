@@ -63,7 +63,7 @@ pipeline {
                 script {
                     sh '''
                     echo "Setting up kubeconfig..."
-                    export KUBECONFIG= ~/.kube/config # Adjust the path if necessary
+                    export KUBECONFIG=~/.kube/config # Adjust the path if necessary
 
                     echo "Applying backend deployment and service..."
                     kubectl apply -f backend-deployment.yaml
