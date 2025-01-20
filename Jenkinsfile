@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         SONARQUBE_SERVER_URL = 'http://18.209.50.117:9000/'       // Replace with your SonarQube server URL
-        SONARQUBE_TOKEN = credentials('SonarQube-Server')               // SonarQube authentication token from Jenkins credentials
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')   // Docker Hub credentials
-        GIT_CREDENTIALS = credentials('github')                        // GitHub credentials
+        SONARQUBE_TOKEN = credentials('SonarQube-Server')         // SonarQube authentication token from Jenkins credentials
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // Docker Hub credentials
+        GIT_CREDENTIALS = credentials('github')                  // GitHub credentials
     }
 
     stages {
@@ -61,29 +61,26 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        // Apply the backend deployment and service
-                        sh '''
-                        echo "Applying backend deployment and service..."
-                        kubectl apply -f backend-deployment.yaml
-                        kubectl apply -f backend-service.yaml
-                        '''
+                    sh '''
+                    echo "Setting up kubeconfig..."
+                    export KUBECONFIG= ~/.kube/config # Adjust the path if necessary
 
-                        // Apply the frontend deployment and service
-                        sh '''
-                        echo "Applying frontend deployment and service..."
-                        kubectl apply -f frontend-deployment.yaml
-                        kubectl apply -f frontend-service.yaml
-                        '''
+                    echo "Applying backend deployment and service..."
+                    kubectl apply -f backend-deployment.yaml
+                    kubectl apply -f backend-service.yaml
 
-                        echo "Checking backend deployment rollout status..."
-                        sh 'kubectl rollout status deployment/backend'
+                    echo "Applying frontend deployment and service..."
+                    kubectl apply -f frontend-deployment.yaml
+                    kubectl apply -f frontend-service.yaml
 
-                        echo "Checking frontend deployment rollout status..."
-                        sh 'kubectl rollout status deployment/frontend'
+                    echo "Checking backend deployment rollout status..."
+                    kubectl rollout status deployment/backend
 
-                        echo "Application deployed successfully!"
-                    }
+                    echo "Checking frontend deployment rollout status..."
+                    kubectl rollout status deployment/frontend
+
+                    echo "Application deployed successfully!"
+                    '''
                 }
             }
         }
