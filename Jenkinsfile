@@ -72,12 +72,6 @@ pipeline {
                     kubectl apply -f frontend-deployment.yaml
                     kubectl apply -f frontend-service.yaml
 
-                    echo "Checking backend deployment rollout status..."
-                    kubectl rollout status deployment/backend
-
-                    echo "Checking frontend deployment rollout status..."
-                    kubectl rollout status deployment/frontend
-
                     echo "Application deployed successfully!"
                     '''
                 }
