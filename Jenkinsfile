@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git credentialsId: 'github', url: 'https://github.com/Kavetec/CICD.git', branch: 'main'
+                git credentialsId: 'github-credentials', url: 'https://github.com/Kavetec/CICD.git', branch: 'main'
             }
         }
 
