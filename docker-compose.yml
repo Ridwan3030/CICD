@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: ./web
-    image: ridwan3030/first-repo-aws:v1
+    image: ridwan3030/web:latest
     ports:
       - "80:80"
     depends_on:
@@ -10,7 +10,7 @@ services:
 
   api:
     build: ./api
-    image: ridwan3030/first-repo-aws:v1
+    image: ridwan3030/api:latest
     ports:
       - "5000:5000"
     depends_on:
